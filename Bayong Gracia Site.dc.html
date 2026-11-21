@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet"><style>body{margin:0;background:#F3EBDD;font-family:'Averia Serif Libre',Georgia,serif;color:#1D1A17}a{color:#6B1A24;text-decoration:none}a:hover{color:#1D1A17}button,input,textarea,select{font-family:inherit}button{cursor:pointer}input:focus,textarea:focus{outline:2px solid #6B1A24;outline-offset:1px}@keyframes bgUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}@keyframes bgFade{from{opacity:0}to{opacity:1}}@keyframes bgSlideIn{from{transform:translateX(100%)}to{transform:none}}@keyframes bgDrop{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}@keyframes bgSway{from{transform:rotate(-5deg)}to{transform:rotate(4deg)}}@keyframes bgZoom{from{transform:scale(1)}to{transform:scale(1.08)}}@keyframes bgMarq{to{transform:translateX(-50%)}}@keyframes bgBanig{to{background-position:140px 0}}@keyframes bgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style></helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+
+<div style="background:#6B1A24;color:#F3EBDD;overflow:hidden;padding:9px 0;font-size:13px;letter-spacing:.2em;text-transform:uppercase"><div style="display:flex;width:max-content;animation:bgMarq 32s linear infinite"><div style="display:flex;gap:28px;padding-right:28px;flex:none"><span>Libreng shipping sa ₱2,000 pataas</span><span style="color:#B8925A">◆</span><span>Gawa ng kamay sa Paniqui, Tarlac</span><span style="color:#B8925A">◆</span><span>Custom na pinta, mag-message lang</span><span style="color:#B8925A">◆</span><span>Mula 2018</span><span style="color:#B8925A">◆</span></div><div style="display:flex;gap:28px;padding-right:28px;flex:none"><span>Libreng shipping sa ₱2,000 pataas</span><span style="color:#B8925A">◆</span><span>Gawa ng kamay sa Paniqui, Tarlac</span><span style="color:#B8925A">◆</span><span>Custom na pinta, mag-message lang</span><span style="color:#B8925A">◆</span><span>Mula 2018</span><span style="color:#B8925A">◆</span></div></div></div>
+
+<header style="position:sticky;top:0;z-index:20;background:#F3EBDD;border-bottom:1px solid #D8C7A8">
+<div style="max-width:1440px;margin:0 auto;padding:22px clamp(18px,4vw,56px);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:14px 28px">
+<nav style="display:flex;flex-wrap:wrap;gap:4px 40px;font-size:18px;justify-self:start">
+<sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4"><button onClick="{{ n.onClick }}" style="background:none;border:0;padding:8px 0;font-size:18px;color:{{ n.color }};border-bottom:1.5px solid {{ n.line }};transition:color .2s" style-hover="color:#6B1A24">{{ n.label }}</button></sc-for>
+</nav>
+<button onClick="{{ goHome }}" aria-label="Bayong Gracia — Home" style="width:clamp(150px,13vw,224px);aspect-ratio:1908/569;border:0;padding:0;background:#6B1A24;-webkit-mask:url(assets/logo.png) center/contain no-repeat;mask:url(assets/logo.png) center/contain no-repeat;justify-self:center"></button>
+<div style="display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px 34px;align-items:center;font-size:18px;justify-self:end">
+<button onClick="{{ openSearch }}" style="white-space:nowrap;background:none;border:0;padding:8px 0;font-size:18px;color:#1D1A17" style-hover="color:#6B1A24">Hanapin</button>
+<button onClick="{{ goAccount }}" style="white-space:nowrap;background:none;border:0;padding:8px 0;font-size:18px;color:#1D1A17" style-hover="color:#6B1A24">{{ accountLabel }}</button>
+<button onClick="{{ openCart }}" style="flex:none;white-space:nowrap;background:none;border:0;padding:8px 0;font-size:18px;font-weight:700;color:#6B1A24" style-hover="color:#1D1A17">Bayong ({{ cartCount }})</button>
+</div>
+</div>
+</header>
+<div style="height:10px;background:conic-gradient(from 45deg,#6B1A24 25%,#D8C7A8 0 50%,#6B1A24 0 75%,#D8C7A8 0) 0 0/10px 10px;animation:bgBanig 8s linear infinite"></div>
+
+<main style="flex:1">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(18px,4vw,56px) clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,56px);align-items:center">
+<div style="display:flex;flex-direction:column;gap:26px">
+<div style="font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#6B1A24;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both">Hinabi · Hand-painted · Paniqui, Tarlac</div>
+<h1 style="margin:0;font-weight:700;font-size:clamp(46px,6.2vw,80px);line-height:1;color:#6B1A24"><span style="display:block;animation:bgUp .9s .15s cubic-bezier(.2,.7,.2,1) both">Bawat bayong,</span><span style="display:block;animation:bgUp .9s .3s cubic-bezier(.2,.7,.2,1) both">may kuwento.</span></h1>
+<p style="margin:0;font-weight:300;font-size:19px;line-height:1.6;max-width:460px;text-wrap:pretty;animation:bgUp .9s .45s cubic-bezier(.2,.7,.2,1) both">Mga bag na hinabi at ipininta ng kamay, kasama ang mga lokal na manghahabi at pintor. Makulay, matibay, at sinadyang gawin para sa araw-araw.</p>
+<div style="display:flex;flex-wrap:wrap;gap:14px;animation:bgUp .9s .6s cubic-bezier(.2,.7,.2,1) both"><button onClick="{{ goShop }}" style="background:#6B1A24;color:#F3EBDD;border:0;padding:17px 28px;font-size:13px;letter-spacing:.2em;border-radius:2px;transition:background .25s,transform .25s" style-hover="background:#561420;transform:translateY(-2px)" style-active="transform:scale(.97)">TINGNAN ANG KOLEKSYON</button><button onClick="{{ goCustom }}" style="background:none;border:1.5px solid #6B1A24;color:#6B1A24;padding:15px 26px;font-size:13px;letter-spacing:.2em;border-radius:2px;transition:background .25s,color .25s" style-hover="background:#6B1A24;color:#F3EBDD">CUSTOM NA PINTA</button></div>
+</div>
+<div style="position:relative;overflow:hidden;animation:bgUp 1s .2s cubic-bezier(.2,.7,.2,1) both"><img src="assets/home-hero.jpg" alt="Mga hinabing bayong ng Bayong Gracia na may kahoy na hawakan" style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 45%;animation:bgZoom 16s ease-in-out infinite alternate"></img>
+<div style="position:absolute;top:clamp(16px,3vw,36px);right:clamp(16px,3vw,36px);width:124px;background:#6B1A24;color:#F3EBDD;padding:16px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:9px;box-shadow:0 10px 24px rgba(29,26,23,.25);transform-origin:50% 0;animation:bgSway 3.2s ease-in-out infinite alternate"><div style="width:10px;height:10px;border-radius:50%;background:#F3EBDD"></div><div style="width:38px;height:40px;animation:bgFloat 3s ease-in-out infinite;background:#B8925A;-webkit-mask:url(assets/mark.png) center/contain no-repeat;mask:url(assets/mark.png) center/contain no-repeat"></div><div style="font-size:16px;text-align:center;line-height:1.15">Gawa sa Paniqui</div><div style="height:1px;width:100%;background:#B8925A"></div><div style="font-size:11px;letter-spacing:.2em">MULA 2018</div></div>
+</div>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px)">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));border-top:1px solid #B8925A;border-bottom:1px solid #B8925A">
+<sc-for list="{{ pillars }}" as="pl" hint-placeholder-count="3"><div style="padding:30px 28px 30px 0;display:flex;flex-direction:column;gap:8px;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ pl.delay }}"><div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">{{ pl.title }}</div><div style="font-size:21px;line-height:1.3">{{ pl.body }}</div></div></sc-for>
+</div>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,88px) clamp(18px,4vw,56px);display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px"><h2 style="margin:0;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2">Mga paborito ngayong buwan</h2><button onClick="{{ goShop }}" style="background:none;border:0;padding:0;font-size:13px;letter-spacing:.2em;color:#6B1A24" style-hover="color:#1D1A17">LAHAT NG BAYONG →</button></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:28px 24px">
+<sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+<button onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:10px;background:none;border:0;padding:0;text-align:left;color:#1D1A17;transition:transform .35s cubic-bezier(.2,.7,.2,1);animation:bgUp .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ p.delay }}" style-hover="transform:translateY(-6px)">
+<div style="position:relative;width:100%;aspect-ratio:4/5;background:#E6DAC4;overflow:hidden"><img src="{{ p.img }}" alt="{{ p.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></img><sc-if value="{{ p.tag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;z-index:2;display:flex;align-items:center;gap:6px;background:{{ p.tagBg }};color:{{ p.tagFg }};font-size:11px;letter-spacing:.2em;padding:7px 11px 7px 9px;box-shadow:0 4px 10px rgba(29,26,23,.25);transform-origin:0 50%;animation:bgSway 2.8s ease-in-out infinite alternate"><span style="width:6px;height:6px;border-radius:50%;background:#F3EBDD;flex:none"></span>{{ p.tag }}</span></sc-if></div>
+<span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6B1A24">{{ p.mat }}</span>
+<span style="display:flex;justify-content:space-between;gap:12px;width:100%;font-size:18px"><span>{{ p.name }}</span><span>{{ p.priceStr }}</span></span>
+</button>
+</sc-for>
+</div>
+</section>
+<section style="background:#6B1A24;color:#F3EBDD">
+<div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+<div style="position:relative;min-height:420px;overflow:hidden;background:#561420"><img src="assets/honey-tess.png" alt="Si Honey Tess B. Alcantara sa Likha ng Central Luzon Trade Fair, hawak ang isang hinabing bag" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%"></img></div>
+<div style="padding:clamp(40px,6vw,72px) clamp(24px,5vw,64px);display:flex;flex-direction:column;justify-content:center;gap:22px;border-left:10px solid transparent;border-image:conic-gradient(from 45deg,#F3EBDD 25%,#6B1A24 0 50%,#F3EBDD 0 75%,#6B1A24 0) 1">
+<div style="font-size:13px;letter-spacing:.2em;color:#D8C7A8">ANG AMING KUWENTO · MULA 2018</div>
+<h2 style="margin:0;font-weight:400;font-size:clamp(30px,3.4vw,40px);line-height:1.2;text-wrap:balance">Mula sa pangarap ng isang guro sa Paniqui, Tarlac.</h2>
+<p style="margin:0;font-weight:300;font-size:18px;line-height:1.6;max-width:480px;text-wrap:pretty">Guro si Honey Tess B. Alcantara na may hilig sa fashion at negosyo. Noong 2018, itinayo niya ang Bayong Gracia — kasama ang mga lokal na manghahabi at pintor.</p>
+<button onClick="{{ goStory }}" style="align-self:flex-start;background:none;border:0;border-bottom:1px solid #B8925A;color:#F3EBDD;padding:0 0 6px;font-size:13px;letter-spacing:.2em" style-hover="border-color:#F3EBDD">BASAHIN ANG KUWENTO →</button>
+</div>
+</div>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,80px) clamp(18px,4vw,56px);display:flex;flex-wrap:wrap;gap:24px 56px;align-items:center;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:560px"><h2 style="margin:0;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2">Gusto mo ng sariling pinta?</h2><p style="margin:0;font-weight:300;font-size:18px;line-height:1.6">Pangalan, bulaklak, o kulay ng inyong pamilya — ipipinta namin sa iyong bayong.</p></div>
+<button onClick="{{ goCustom }}" style="background:#6B1A24;color:#F3EBDD;border:0;padding:17px 28px;font-size:13px;letter-spacing:.2em;border-radius:2px;transition:background .25s" style-hover="background:#561420">MAGPAGAWA NG CUSTOM</button>
+</section>
+</sc-if>
+
+<sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1280px;margin:0 auto;padding:clamp(36px,5vw,56px) clamp(18px,4vw,56px) 88px;display:flex;flex-direction:column;gap:26px">
+<div style="display:flex;flex-direction:column;gap:10px;animation:bgUp .7s cubic-bezier(.2,.7,.2,1) both"><div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">{{ shopCount }}</div><h1 style="margin:0;font-weight:700;font-size:clamp(40px,5vw,60px);line-height:1;color:#6B1A24">{{ shopTitle }}</h1><p style="margin:0;font-weight:300;font-size:17px;line-height:1.6;max-width:560px">Bawat isa ay hinabi at ipininta ng kamay — kaya bahagyang naiiba ang bawat piraso.</p></div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-top:1px solid #D8C7A8;border-bottom:1px solid #D8C7A8">
+<div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ filters }}" as="f" hint-placeholder-count="5"><button onClick="{{ f.onClick }}" style="height:40px;padding:0 16px;border-radius:20px;border:1.5px solid #6B1A24;background:{{ f.bg }};color:{{ f.fg }};font-size:14px;transition:background .2s,color .2s">{{ f.label }}</button></sc-for></div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:14px"><span style="font-size:12px;letter-spacing:.2em">AYUSIN:</span><sc-for list="{{ sorts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.onClick }}" style="background:none;border:0;padding:6px 0;font-size:14px;color:{{ o.color }};border-bottom:1.5px solid {{ o.line }}">{{ o.label }}</button></sc-for></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:36px 24px">
+<sc-for list="{{ shopList }}" as="p" hint-placeholder-count="6">
+<button onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:10px;background:none;border:0;padding:0;text-align:left;color:#1D1A17;transition:transform .35s cubic-bezier(.2,.7,.2,1);animation:bgUp .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ p.delay }}" style-hover="transform:translateY(-6px)">
+<div style="position:relative;width:100%;aspect-ratio:4/5;background:#E6DAC4;overflow:hidden"><img src="{{ p.img }}" alt="{{ p.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></img><sc-if value="{{ p.tag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;z-index:2;display:flex;align-items:center;gap:6px;background:{{ p.tagBg }};color:{{ p.tagFg }};font-size:11px;letter-spacing:.2em;padding:7px 11px 7px 9px;box-shadow:0 4px 10px rgba(29,26,23,.25);transform-origin:0 50%;animation:bgSway 2.8s ease-in-out infinite alternate"><span style="width:6px;height:6px;border-radius:50%;background:#F3EBDD;flex:none"></span>{{ p.tag }}</span></sc-if></div>
+<span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6B1A24">{{ p.mat }}</span>
+<span style="display:flex;justify-content:space-between;gap:12px;width:100%;font-size:18px"><span>{{ p.name }}</span><span>{{ p.priceStr }}</span></span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{ shopEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:48px 0;text-align:center;font-size:20px">Wala pang bayong sa kategoryang ito.</div></sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+<div style="max-width:1280px;margin:0 auto;padding:22px clamp(18px,4vw,56px) 0;display:flex;flex-wrap:wrap;gap:8px;font-size:13px;letter-spacing:.2em;text-transform:uppercase"><button onClick="{{ goShop }}" style="background:none;border:0;padding:0;font-size:13px;letter-spacing:.2em;color:#1D1A17;text-decoration:underline">Koleksyon</button><span>/</span><span>{{ prod.cat }}</span><span>/</span><span style="color:#6B1A24">{{ prod.name }}</span></div>
+<section style="max-width:1280px;margin:0 auto;padding:24px clamp(18px,4vw,56px) 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,5vw,64px);align-items:start">
+<div style="display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:start;animation:bgUp .7s cubic-bezier(.2,.7,.2,1) both">
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="4"><button onClick="{{ t.onClick }}" aria-label="{{ t.label }}" style="position:relative;aspect-ratio:4/5;padding:0;overflow:hidden;border:{{ t.border }};background:#E6DAC4"><img src="{{ prod.img }}" alt="{{ t.label }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ t.pos }};transform:scale({{ t.scale }});transform-origin:{{ t.pos }}"></img></button></sc-for>
+</div>
+<div style="position:relative;aspect-ratio:4/5;background:#E6DAC4;overflow:hidden"><img src="{{ prod.img }}" alt="{{ prod.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ mainPos }};transform:scale({{ mainScale }});transform-origin:{{ mainPos }};transition:transform .6s cubic-bezier(.2,.7,.2,1),object-position .6s"></img><span style="position:absolute;left:14px;bottom:14px;font-size:12px;letter-spacing:.2em;background:#F3EBDD;padding:5px 9px">{{ mainLabel }}</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px;position:sticky;top:100px;animation:bgUp .7s .1s cubic-bezier(.2,.7,.2,1) both">
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-if value="{{ prod.tag }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;display:flex;align-items:center;gap:6px;background:{{ prod.tagBg }};color:{{ prod.tagFg }};font-size:11px;letter-spacing:.2em;padding:6px 10px 6px 8px"><span style="width:6px;height:6px;border-radius:50%;background:#F3EBDD"></span>{{ prod.tag }}</span></sc-if>
+<div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">{{ prod.label }}</div>
+<h1 style="margin:0;font-weight:700;font-size:clamp(40px,4.4vw,56px);line-height:1;color:#6B1A24">{{ prod.name }}</h1>
+<div style="font-size:26px">{{ unitPriceStr }}</div>
+</div>
+<p style="margin:0;font-weight:300;font-size:17px;line-height:1.6;text-wrap:pretty">{{ prod.desc }}</p>
+<div style="height:1px;background:#B8925A"></div>
+<div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;letter-spacing:.2em">DISENYO · <span style="color:#6B1A24">{{ prod.name }}</span></div><div style="display:flex;flex-wrap:wrap;gap:10px"><sc-for list="{{ designOpts }}" as="o" hint-placeholder-count="5"><button onClick="{{ o.onClick }}" aria-label="{{ o.label }}" title="{{ o.label }}" style="width:48px;height:48px;border-radius:50%;padding:3px;background:#F3EBDD;border:{{ o.ring }};transition:border-color .2s"><img src="{{ o.img }}" alt="{{ o.label }}" style="display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 62%"></img></button></sc-for></div></div>
+<div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:13px;letter-spacing:.2em">LAKI</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><sc-for list="{{ lakiOpts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.onClick }}" style="padding:12px 6px;background:{{ o.bg }};color:{{ o.fg }};border:1.5px solid #6B1A24;border-radius:2px;display:flex;flex-direction:column;gap:2px;align-items:center;transition:background .2s,color .2s"><span style="font-size:15px">{{ o.label }}</span><span style="font-size:12px;font-weight:300">{{ o.dim }}</span></button></sc-for></div></div>
+<div style="display:grid;grid-template-columns:auto 1fr;gap:12px">
+<div style="display:flex;align-items:center;border:1.5px solid #6B1A24;border-radius:2px"><button onClick="{{ decQty }}" aria-label="Bawasan" style="width:46px;height:54px;border:0;background:none;font-size:20px;color:#6B1A24">−</button><span style="width:26px;text-align:center;font-size:17px">{{ qty }}</span><button onClick="{{ incQty }}" aria-label="Dagdagan" style="width:46px;height:54px;border:0;background:none;font-size:20px;color:#6B1A24">+</button></div>
+<button onClick="{{ addToCart }}" style="background:#6B1A24;color:#F3EBDD;border:0;border-radius:2px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;transition:background .25s,transform .15s" style-hover="background:#561420" style-active="transform:scale(.97)">{{ addLabel }}</button>
+</div>
+<button onClick="{{ goCustom }}" style="align-self:flex-start;background:none;border:0;padding:0;font-size:15px;color:#6B1A24;text-decoration:underline">Gusto ng ibang pinta o pangalan? Magpagawa ng custom.</button>
+<div style="display:flex;flex-direction:column;border-top:1px solid #D8C7A8">
+<sc-for list="{{ details }}" as="d" hint-placeholder-count="3"><div style="border-bottom:1px solid #D8C7A8"><button onClick="{{ d.onClick }}" style="width:100%;display:flex;justify-content:space-between;padding:16px 0;background:none;border:0;font-size:17px;color:#1D1A17;text-align:left"><span>{{ d.title }}</span><span style="color:#6B1A24">{{ d.sign }}</span></button><sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}"><p style="margin:0 0 18px;font-weight:300;font-size:16px;line-height:1.6;animation:bgFade .3s both">{{ d.body }}</p></sc-if></div></sc-for>
+</div>
+</div>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px) 64px">
+<div style="display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;padding:28px;border:10px solid transparent;border-image:conic-gradient(from 45deg,#6B1A24 25%,#D8C7A8 0 50%,#6B1A24 0 75%,#D8C7A8 0) 1">
+<img src="assets/honey-tess.png" alt="Honey Tess B. Alcantara" style="width:110px;height:110px;flex:none;border-radius:50%;object-fit:cover;object-position:32% 34%;transform:none"></img>
+<div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">HONEY TESS B. ALCANTARA · TAGAPAGTATAG</div><div style="font-size:clamp(20px,2.2vw,24px);line-height:1.3;font-style:italic">“Gawa ng kamay ng mga taga-rito — bawat bayong, personal naming binabantayan mula habi hanggang pinta.”</div></div>
+</div>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px) 88px;display:flex;flex-direction:column;gap:26px">
+<h2 style="margin:0;font-weight:400;font-size:28px;line-height:1.2">Baka magustuhan mo rin</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:28px 24px">
+<sc-for list="{{ related }}" as="p" hint-placeholder-count="4">
+<button onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:10px;background:none;border:0;padding:0;text-align:left;color:#1D1A17;transition:transform .35s cubic-bezier(.2,.7,.2,1);animation:bgUp .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ p.delay }}" style-hover="transform:translateY(-6px)">
+<div style="position:relative;width:100%;aspect-ratio:4/5;background:#E6DAC4;overflow:hidden"><img src="{{ p.img }}" alt="{{ p.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></img><sc-if value="{{ p.tag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;z-index:2;display:flex;align-items:center;gap:6px;background:{{ p.tagBg }};color:{{ p.tagFg }};font-size:11px;letter-spacing:.2em;padding:7px 11px 7px 9px;box-shadow:0 4px 10px rgba(29,26,23,.25);transform-origin:0 50%;animation:bgSway 2.8s ease-in-out infinite alternate"><span style="width:6px;height:6px;border-radius:50%;background:#F3EBDD;flex:none"></span>{{ p.tag }}</span></sc-if></div>
+<span style="display:flex;justify-content:space-between;gap:12px;width:100%;font-size:17px"><span>{{ p.name }}</span><span>{{ p.priceStr }}</span></span>
+</button>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isStory }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(18px,4vw,56px) 56px;display:flex;flex-direction:column;gap:22px;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both">
+<div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">ANG AMING KUWENTO · PANIQUI, TARLAC</div>
+<h1 style="margin:0;font-weight:700;font-size:clamp(44px,6vw,80px);line-height:1;color:#6B1A24;max-width:900px;text-wrap:balance">Mula sa pangarap ng isang guro.</h1>
+<p style="margin:0;font-weight:300;font-size:clamp(18px,1.8vw,21px);line-height:1.6;max-width:640px">Itinayo ni Honey Tess B. Alcantara ang Bayong Gracia noong 2018 — isang maliit na negosyo ng mga bag na hinabi at ipininta ng kamay.</p>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px) 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,5vw,64px);align-items:center">
+<div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#E6DAC4"><img src="assets/honey-tess.png" alt="Si Honey Tess B. Alcantara, tagapagtatag ng Bayong Gracia" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%"></img><span style="position:absolute;left:14px;bottom:14px;font-size:12px;letter-spacing:.2em;background:#F3EBDD;padding:5px 9px">LIKHA NG CENTRAL LUZON · TRADE FAIR</span></div>
+<div style="display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2">Guro, mangangarap, negosyante.</h2>
+<p style="margin:0;font-weight:300;font-size:18px;line-height:1.7">Guro si Honey Tess, pero matagal na niyang hilig ang fashion at pagnenegosyo. Sinubukan niya ang direct selling, networking, at pagbebenta ng bag — at hindi lahat ay nagtagumpay.</p>
+<p style="margin:0;font-weight:300;font-size:18px;line-height:1.7">Noong 2018, pinili niyang ituloy ang sariling pangarap: mga bag na personal na ginagawa kasama ang mga lokal na manghahabi at pintor — makulay, uso, at may kalidad na maipagmamalaki.</p>
+<p style="margin:0;font-size:22px;line-height:1.4;font-style:italic;color:#6B1A24">“Bawat bayong, may kuwento.”</p>
+</div>
+</section>
+<section style="background:#6B1A24;color:#F3EBDD">
+<div style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,88px) clamp(18px,4vw,56px);display:flex;flex-direction:column;gap:36px">
+<h2 style="margin:0;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2">Paano lumago ang Bayong Gracia</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0">
+<sc-for list="{{ milestones }}" as="m" hint-placeholder-count="4"><div style="padding:24px 24px 24px 0;border-top:1px solid #B8925A;display:flex;flex-direction:column;gap:10px;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ m.delay }}"><div style="font-size:13px;letter-spacing:.2em;color:#D8C7A8">{{ m.k }}</div><div style="font-size:22px;line-height:1.25">{{ m.title }}</div><p style="margin:0;font-weight:300;font-size:16px;line-height:1.6">{{ m.body }}</p></div></sc-for>
+</div>
+</div>
+</section>
+<div style="height:14px;background:conic-gradient(from 45deg,#6B1A24 25%,#D8C7A8 0 50%,#6B1A24 0 75%,#D8C7A8 0) 0 0/14px 14px;animation:bgBanig 8s linear infinite"></div>
+<section style="max-width:1280px;margin:0 auto;padding:clamp(56px,7vw,88px) clamp(18px,4vw,56px);display:flex;flex-direction:column;gap:32px">
+<h2 style="margin:0;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2">Ano ang kakaiba sa amin</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:28px">
+<sc-for list="{{ values }}" as="v" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:2px solid #6B1A24"><div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">{{ v.title }}</div><p style="margin:0;font-weight:300;font-size:17px;line-height:1.6">{{ v.body }}</p></div></sc-for>
+</div>
+<div style="position:relative;overflow:hidden"><img src="assets/home-hero.jpg" alt="Mga gawa ng Bayong Gracia" style="display:block;width:100%;aspect-ratio:16/8;object-fit:cover;object-position:center 40%"></img></div>
+<div style="display:flex;flex-wrap:wrap;gap:14px"><button onClick="{{ goShop }}" style="background:#6B1A24;color:#F3EBDD;border:0;padding:17px 28px;font-size:13px;letter-spacing:.2em;border-radius:2px" style-hover="background:#561420">TINGNAN ANG KOLEKSYON</button><button onClick="{{ goCustom }}" style="background:none;border:1.5px solid #6B1A24;color:#6B1A24;padding:15px 26px;font-size:13px;letter-spacing:.2em;border-radius:2px" style-hover="background:#6B1A24;color:#F3EBDD">MAGPAGAWA NG CUSTOM</button></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isCustom }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(18px,4vw,56px) 48px;display:flex;flex-direction:column;gap:20px;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both">
+<div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">CUSTOM NA PINTA</div>
+<h1 style="margin:0;font-weight:700;font-size:clamp(44px,6vw,76px);line-height:1;color:#6B1A24;max-width:900px">Ipinta natin ang kuwento mo.</h1>
+<p style="margin:0;font-weight:300;font-size:19px;line-height:1.6;max-width:620px">Pangalan, paboritong bulaklak, o regalo para sa isang espesyal na tao — sabihin mo lang, at ipipinta namin ito sa iyong bayong.</p>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px) 56px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));border-top:1px solid #B8925A;border-bottom:1px solid #B8925A">
+<sc-for list="{{ steps }}" as="st" hint-placeholder-count="3"><div style="padding:28px 28px 28px 0;display:flex;flex-direction:column;gap:10px;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ st.delay }}"><div style="font-size:40px;line-height:1;color:#6B1A24;font-weight:700">{{ st.n }}</div><div style="font-size:21px">{{ st.title }}</div><p style="margin:0;font-weight:300;font-size:16px;line-height:1.6">{{ st.body }}</p></div></sc-for>
+</div>
+</section>
+<section style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,56px) 88px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,56px);align-items:start">
+<div style="display:flex;flex-direction:column;gap:18px">
+<h2 style="margin:0;font-weight:400;font-size:28px">Mga naipinta na namin</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+<sc-for list="{{ gallery }}" as="g" hint-placeholder-count="5"><button onClick="{{ g.open }}" aria-label="{{ g.name }}" style="position:relative;aspect-ratio:1/1;padding:0;border:0;overflow:hidden;background:#E6DAC4;transition:transform .3s" style-hover="transform:scale(1.03)"><img src="{{ g.img }}" alt="{{ g.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%"></img></button></sc-for>
+</div>
+</div>
+<div style="background:#FBF7F0;border:1px solid #D8C7A8;padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:16px">
+<sc-if value="{{ customNotSent }}" hint-placeholder-val="{{ true }}">
+<h2 style="margin:0;font-weight:400;font-size:26px">Sabihin mo ang gusto mo</h2>
+<sc-for list="{{ customFields }}" as="f" hint-placeholder-count="2"><label style="display:flex;flex-direction:column;gap:6px;font-size:14px"><span>{{ f.label }}</span><input value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.ph }}" style="height:48px;border:1.5px solid #D8C7A8;background:#F3EBDD;border-radius:2px;padding:0 12px;font-size:16px;color:#1D1A17"></input></label></sc-for>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><span>Kulay ng habi</span><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ baseOpts }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.onClick }}" style="height:40px;padding:0 14px 0 8px;border-radius:20px;border:1.5px solid {{ b.border }};background:#F3EBDD;display:flex;align-items:center;gap:8px;font-size:14px;color:#1D1A17"><span style="width:24px;height:24px;border-radius:50%;background:{{ b.sw }};border:1px solid rgba(29,26,23,.2)"></span>{{ b.label }}</button></sc-for></div></div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:14px"><span>Ano ang gusto mong ipinta?</span><textarea value="{{ customIdea }}" onChange="{{ onIdea }}" placeholder="Hal. pangalang “Lola Celia” na may sampaguita, para sa kaarawan" rows="4" style="border:1.5px solid #D8C7A8;background:#F3EBDD;border-radius:2px;padding:12px;font-size:16px;color:#1D1A17;resize:vertical"></textarea></label>
+<sc-if value="{{ customError }}" hint-placeholder-val="{{ false }}"><div style="color:#6B1A24;font-size:14px">Pakilagay ang pangalan, contact, at ang gusto mong ipinta.</div></sc-if>
+<button onClick="{{ sendCustom }}" style="height:54px;background:#6B1A24;color:#F3EBDD;border:0;border-radius:2px;font-size:13px;letter-spacing:.2em;transition:background .25s,transform .15s" style-hover="background:#561420" style-active="transform:scale(.98)">IPADALA ANG REQUEST</button>
+<div style="font-weight:300;font-size:14px;line-height:1.5">O mag-message sa amin sa Facebook, Instagram, o TikTok.</div>
+</sc-if>
+<sc-if value="{{ customSent }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;align-items:flex-start;gap:14px;animation:bgUp .6s cubic-bezier(.2,.7,.2,1) both"><div style="width:48px;height:50px;background:#6B1A24;-webkit-mask:url(assets/mark.png) center/contain no-repeat;mask:url(assets/mark.png) center/contain no-repeat"></div><h2 style="margin:0;font-weight:400;font-size:28px">Natanggap namin, {{ customFirst }}!</h2><p style="margin:0;font-weight:300;font-size:17px;line-height:1.6">Magme-message kami sa {{ customContact }} para pag-usapan ang disenyo at presyo.</p><button onClick="{{ resetCustom }}" style="background:none;border:0;padding:0;font-size:13px;letter-spacing:.2em;color:#6B1A24;text-decoration:underline">MAGPADALA NG ISA PA</button></div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isHelp }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:880px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(18px,4vw,56px) 88px;display:flex;flex-direction:column;gap:28px;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both">
+<div style="display:flex;flex-direction:column;gap:14px"><div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">TULONG</div><h1 style="margin:0;font-weight:700;font-size:clamp(40px,5vw,60px);line-height:1;color:#6B1A24">Paano kami makakatulong?</h1></div>
+<div style="display:flex;flex-direction:column;border-top:1px solid #D8C7A8">
+<sc-for list="{{ helpItems }}" as="d" hint-placeholder-count="5"><div style="border-bottom:1px solid #D8C7A8"><button onClick="{{ d.onClick }}" style="width:100%;display:flex;justify-content:space-between;gap:16px;padding:20px 0;background:none;border:0;font-size:20px;color:#1D1A17;text-align:left"><span>{{ d.title }}</span><span style="color:#6B1A24">{{ d.sign }}</span></button><sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}"><p style="margin:0 0 22px;font-weight:300;font-size:17px;line-height:1.7;max-width:680px;animation:bgFade .3s both">{{ d.body }}</p></sc-if></div></sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;padding:22px;background:#D8C7A8"><span style="font-size:18px;flex:1;min-width:220px">May tanong pa? Mag-message sa amin.</span><span style="font-size:13px;letter-spacing:.2em">FACEBOOK · INSTAGRAM · TIKTOK</span></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isAccount }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:960px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(18px,4vw,56px) 88px;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both">
+<sc-if value="{{ loggedOut }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+<h1 style="margin:0;font-weight:700;font-size:44px;line-height:1;color:#6B1A24">Mag-login</h1>
+<p style="margin:0;font-weight:300;font-size:16px;line-height:1.6">Para makita ang mga order mo at mas mabilis na mag-checkout.</p>
+<sc-for list="{{ loginFields }}" as="f" hint-placeholder-count="2"><label style="display:flex;flex-direction:column;gap:6px;font-size:14px"><span>{{ f.label }}</span><input type="{{ f.type }}" value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.ph }}" style="height:48px;border:1.5px solid #D8C7A8;background:#FBF7F0;border-radius:2px;padding:0 12px;font-size:16px;color:#1D1A17"></input></label></sc-for>
+<sc-if value="{{ loginError }}" hint-placeholder-val="{{ false }}"><div style="color:#6B1A24;font-size:14px">Pakilagay ang email at password.</div></sc-if>
+<button onClick="{{ doLogin }}" style="height:54px;background:#6B1A24;color:#F3EBDD;border:0;border-radius:2px;font-size:13px;letter-spacing:.2em" style-hover="background:#561420">MAG-LOGIN</button>
+<div style="font-weight:300;font-size:14px">Wala pang account? Gagawa kami ng isa pag nag-login ka.</div>
+</div>
+</sc-if>
+<sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px"><div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">ACCOUNT</div><h1 style="margin:0;font-weight:700;font-size:clamp(36px,5vw,52px);line-height:1;color:#6B1A24">Kumusta, {{ userName }}!</h1><div style="font-weight:300;font-size:16px">{{ userEmail }}</div></div><button onClick="{{ doLogout }}" style="background:none;border:1.5px solid #6B1A24;color:#6B1A24;padding:12px 20px;font-size:12px;letter-spacing:.2em;border-radius:2px">MAG-LOGOUT</button></div>
+<h2 style="margin:0;font-weight:400;font-size:26px">Mga order mo</h2>
+<sc-if value="{{ noOrders }}" hint-placeholder-val="{{ true }}"><div style="padding:28px;border:1px dashed #B8925A;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between"><span style="font-size:18px">Wala ka pang order.</span><button onClick="{{ goShop }}" style="background:#6B1A24;color:#F3EBDD;border:0;padding:14px 22px;font-size:12px;letter-spacing:.2em;border-radius:2px">MAMILI NA</button></div></sc-if>
+<sc-for list="{{ orderList }}" as="o" hint-placeholder-count="0"><div style="display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #D8C7A8"><div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;letter-spacing:.2em;color:#6B1A24">{{ o.no }}</span><span style="font-size:17px">{{ o.summary }}</span></div><span style="font-size:13px;letter-spacing:.2em;background:#D8C7A8;padding:6px 10px">{{ o.status }}</span><span style="font-size:18px">{{ o.totalStr }}</span></div></sc-for>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isCheckout }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1180px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(18px,4vw,56px) 88px;display:flex;flex-direction:column;gap:28px;animation:bgUp .7s cubic-bezier(.2,.7,.2,1) both">
+<h1 style="margin:0;font-weight:700;font-size:clamp(40px,5vw,56px);line-height:1;color:#6B1A24">Checkout</h1>
+<sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:28px;border:1px dashed #B8925A;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between"><span style="font-size:18px">Wala pang laman ang bayong mo.</span><button onClick="{{ goShop }}" style="background:#6B1A24;color:#F3EBDD;border:0;padding:14px 22px;font-size:12px;letter-spacing:.2em;border-radius:2px">TINGNAN ANG KOLEKSYON</button></div></sc-if>
+<sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,4vw,56px);align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-size:13px;letter-spacing:.2em">SAAN IPAPADALA</div>
+<sc-for list="{{ shipFields }}" as="f" hint-placeholder-count="4"><label style="display:flex;flex-direction:column;gap:6px;font-size:14px"><span>{{ f.label }}</span><input value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.ph }}" style="height:48px;border:1.5px solid #D8C7A8;background:#FBF7F0;border-radius:2px;padding:0 12px;font-size:16px;color:#1D1A17"></input></label></sc-for>
+<div style="font-size:13px;letter-spacing:.2em;margin-top:8px">BAYAD</div>
+<sc-for list="{{ payOpts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.onClick }}" style="min-height:54px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;background:#FBF7F0;border:1.5px solid {{ o.border }};border-radius:2px;font-size:16px;color:#1D1A17;transition:border-color .2s"><span>{{ o.label }}</span><span style="width:18px;height:18px;border-radius:50%;border:1.5px solid #6B1A24;box-sizing:border-box;background:{{ o.fill }}"></span></button></sc-for>
+<sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}"><div style="color:#6B1A24;font-size:14px">Pakilagay ang pangalan, mobile number, at address.</div></sc-if>
+</div>
+<div style="background:#FBF7F0;border:1px solid #D8C7A8;padding:24px;display:flex;flex-direction:column;gap:14px;position:sticky;top:100px">
+<div style="font-size:13px;letter-spacing:.2em">ORDER MO</div>
+<sc-for list="{{ cartItems }}" as="c" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center"><div style="position:relative;aspect-ratio:4/5;background:#E6DAC4;overflow:hidden"><img src="{{ c.img }}" alt="{{ c.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></img></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px">{{ c.name }}</span><span style="font-weight:300;font-size:13px">{{ c.variant }} · ×{{ c.qty }}</span></div><span style="font-size:16px">{{ c.lineStr }}</span></div></sc-for>
+<sc-if value="{{ gift }}" hint-placeholder-val="{{ false }}"><div style="display:flex;justify-content:space-between;font-size:15px;font-weight:300"><span>Banig na kahon</span><span>₱150</span></div></sc-if>
+<div style="height:1px;background:#B8925A"></div>
+<div style="display:flex;justify-content:space-between;font-size:15px;font-weight:300"><span>Shipping</span><span>{{ shipStr }}</span></div>
+<div style="display:flex;justify-content:space-between;font-size:22px"><span>Kabuuan</span><span>{{ totalStr }}</span></div>
+<button onClick="{{ placeOrder }}" style="height:56px;background:#6B1A24;color:#F3EBDD;border:0;border-radius:2px;font-size:13px;letter-spacing:.2em;transition:background .25s,transform .15s" style-hover="background:#561420" style-active="transform:scale(.98)">ILAGAY ANG ORDER</button>
+</div>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:640px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(18px,4vw,56px) 96px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;animation:bgUp .8s cubic-bezier(.2,.7,.2,1) both">
+<div style="width:72px;height:75px;background:#6B1A24;-webkit-mask:url(assets/mark.png) center/contain no-repeat;mask:url(assets/mark.png) center/contain no-repeat;animation:bgFloat 3s ease-in-out infinite"></div>
+<div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">{{ lastOrderNo }}</div>
+<h1 style="margin:0;font-weight:700;font-size:clamp(40px,6vw,60px);line-height:1.05;color:#6B1A24">Salamat, {{ firstName }}!</h1>
+<p style="margin:0;font-weight:300;font-size:18px;line-height:1.6">Sisimulan na naming ihanda ang bayong mo. Magme-message kami kapag naipadala na.</p>
+<div style="width:100%;border-top:1px solid #B8925A;border-bottom:1px solid #B8925A;padding:16px 0;display:flex;justify-content:space-between;font-size:18px"><span>{{ lastPay }}</span><span>{{ lastTotal }}</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center"><button onClick="{{ goShop }}" style="height:52px;padding:0 24px;background:#6B1A24;color:#F3EBDD;border:0;border-radius:2px;font-size:12px;letter-spacing:.2em">BUMALIK SA SHOP</button><button onClick="{{ goAccount }}" style="height:52px;padding:0 22px;background:none;border:1.5px solid #6B1A24;color:#6B1A24;border-radius:2px;font-size:12px;letter-spacing:.2em">TINGNAN ANG ORDER</button></div>
+</section>
+</sc-if>
+
+</main>
+
+<div style="height:14px;background:conic-gradient(from 45deg,#6B1A24 25%,#D8C7A8 0 50%,#6B1A24 0 75%,#D8C7A8 0) 0 0/14px 14px;animation:bgBanig 8s linear infinite"></div>
+<footer style="background:#1D1A17;color:#F3EBDD">
+<div style="max-width:1280px;margin:0 auto;padding:56px clamp(18px,4vw,56px) 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px"><div style="width:150px;height:45px;background:#F3EBDD;-webkit-mask:url(assets/logo.png) left center/contain no-repeat;mask:url(assets/logo.png) left center/contain no-repeat"></div><div style="font-weight:300;font-size:15px;line-height:1.6;color:#D8C7A8">Hinabing kamay · ipininta ang puso.<br>Paniqui, Tarlac · Mula 2018</div></div>
+<div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="font-size:11px;letter-spacing:.2em;color:#D8C7A8">SHOP</div><sc-for list="{{ footShop }}" as="l" hint-placeholder-count="3"><button onClick="{{ l.onClick }}" style="background:none;border:0;padding:0;color:#F3EBDD;font-size:15px;text-align:left" style-hover="color:#B8925A">{{ l.label }}</button></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="font-size:11px;letter-spacing:.2em;color:#D8C7A8">TULONG</div><sc-for list="{{ footHelp }}" as="l" hint-placeholder-count="4"><button onClick="{{ l.onClick }}" style="background:none;border:0;padding:0;color:#F3EBDD;font-size:15px;text-align:left" style-hover="color:#B8925A">{{ l.label }}</button></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:10px"><div style="font-size:11px;letter-spacing:.2em;color:#D8C7A8">SUNDAN</div><a href="#" style="color:#F3EBDD;font-size:15px">Facebook</a><a href="#" style="color:#F3EBDD;font-size:15px">Instagram</a><a href="#" style="color:#F3EBDD;font-size:15px">TikTok</a></div>
+</div>
+<div style="max-width:1280px;margin:0 auto;padding:18px clamp(18px,4vw,56px) 28px;border-top:1px solid #3A332D;font-size:13px;color:#D8C7A8">© 2026 Bayong Gracia · Sa tulong ng DTI Negosyo Center Paniqui</div>
+</footer>
+
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:50;display:flex;justify-content:flex-end">
+<button onClick="{{ closeCart }}" aria-label="Isara" style="position:absolute;inset:0;border:0;padding:0;background:rgba(29,26,23,.45);animation:bgFade .25s both;cursor:default"></button>
+<aside style="position:relative;width:min(440px,100vw);height:100%;background:#F3EBDD;display:flex;flex-direction:column;animation:bgSlideIn .35s cubic-bezier(.2,.7,.2,1) both;box-shadow:-12px 0 32px rgba(29,26,23,.2)">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid #D8C7A8"><h2 style="margin:0;font-weight:700;font-size:30px;color:#6B1A24">Bayong mo</h2><button onClick="{{ closeCart }}" style="height:44px;background:none;border:0;font-size:15px;color:#1D1A17">Isara ✕</button></div>
+<div style="height:8px;background:conic-gradient(from 45deg,#6B1A24 25%,#D8C7A8 0 50%,#6B1A24 0 75%,#D8C7A8 0) 0 0/8px 8px"></div>
+<div style="flex:1;overflow-y:auto;padding:6px 22px 18px">
+<sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ true }}"><div style="margin:12px 0 4px;padding:12px 14px;background:#D8C7A8;font-size:14px;line-height:1.4">{{ shipMsg }}</div></sc-if>
+<sc-for list="{{ cartItems }}" as="c" hint-placeholder-count="2">
+<div style="display:grid;grid-template-columns:84px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid #D8C7A8;animation:bgUp .4s cubic-bezier(.2,.7,.2,1) both">
+<button onClick="{{ c.open }}" aria-label="{{ c.name }}" style="position:relative;aspect-ratio:4/5;padding:0;border:0;background:#E6DAC4;overflow:hidden"><img src="{{ c.img }}" alt="{{ c.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></img></button>
+<div style="display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;justify-content:space-between;gap:8px;font-size:17px"><span>{{ c.name }}</span><span>{{ c.lineStr }}</span></div>
+<div style="font-weight:300;font-size:14px">{{ c.variant }}</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+<div style="display:flex;align-items:center;border:1.5px solid #6B1A24;border-radius:2px"><button onClick="{{ c.dec }}" aria-label="Bawasan" style="width:40px;height:40px;border:0;background:none;font-size:18px;color:#6B1A24">−</button><span style="width:22px;text-align:center">{{ c.qty }}</span><button onClick="{{ c.inc }}" aria-label="Dagdagan" style="width:40px;height:40px;border:0;background:none;font-size:18px;color:#6B1A24">+</button></div>
+<button onClick="{{ c.remove }}" style="height:40px;background:none;border:0;font-size:14px;color:#1D1A17;text-decoration:underline">Alisin</button>
+</div></div></div>
+</sc-for>
+<sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:56px 0;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center"><div style="font-size:20px">Wala pang laman ang bayong mo.</div><button onClick="{{ goShop }}" style="height:50px;padding:0 22px;background:#6B1A24;color:#F3EBDD;border:0;border-radius:2px;font-size:12px;letter-spacing:.2em">TINGNAN ANG KOLEKSYON</button></div></sc-if>
+<sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ true }}">
+<button onClick="{{ toggleGift }}" style="margin-top:16px;width:100%;display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:12px;background:#F3EBDD;border:1.5px solid {{ giftBorder }};border-radius:2px;text-align:left;color:#1D1A17;transition:border-color .2s">
+<div style="width:52px;height:52px;background:conic-gradient(from 45deg,#6B1A24 25%,#D8C7A8 0 50%,#6B1A24 0 75%,#D8C7A8 0) 0 0/13px 13px"></div>
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px">Ibalot sa banig na kahon</span><span style="font-weight:300;font-size:13px">May sulat-kamay na card · +₱150</span></div>
+<span style="width:24px;height:24px;border:1.5px solid #6B1A24;border-radius:2px;background:{{ giftFill }};color:#F3EBDD;display:flex;align-items:center;justify-content:center;font-size:14px">{{ giftCheck }}</span>
+</button>
+</sc-if>
+</div>
+<sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ true }}">
+<div style="border-top:1px solid #B8925A;padding:16px 22px 22px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;font-size:15px;font-weight:300"><span>Shipping</span><span>{{ shipStr }}</span></div>
+<div style="display:flex;justify-content:space-between;font-size:21px"><span>Kabuuan</span><span>{{ totalStr }}</span></div>
+<button onClick="{{ goCheckout }}" style="height:54px;background:#6B1A24;color:#F3EBDD;border:0;border-radius:2px;font-size:13px;letter-spacing:.2em;transition:background .25s" style-hover="background:#561420">MAG-CHECKOUT</button>
+</div>
+</sc-if>
+</aside>
+</div>
+</sc-if>
+
+<sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:60;display:flex;flex-direction:column">
+<div style="background:#F3EBDD;box-shadow:0 12px 32px rgba(29,26,23,.2);animation:bgDrop .3s cubic-bezier(.2,.7,.2,1) both;max-height:85vh;overflow-y:auto">
+<div style="max-width:1280px;margin:0 auto;padding:22px clamp(18px,4vw,56px) 32px;display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;gap:14px;align-items:center;border-bottom:2px solid #6B1A24"><input ref="{{ searchRef }}" value="{{ query }}" onChange="{{ onQuery }}" placeholder="Hanapin ang bayong… (hal. rosas, abo, paru-paro)" style="flex:1;min-width:0;height:60px;border:0;background:none;font-size:clamp(20px,2.4vw,28px);color:#1D1A17;outline:none"></input><button onClick="{{ closeSearch }}" style="height:44px;background:none;border:0;font-size:15px;color:#1D1A17">Isara ✕</button></div>
+<div style="font-size:13px;letter-spacing:.2em;color:#6B1A24">{{ searchCount }}</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:20px">
+<sc-for list="{{ searchResults }}" as="p" hint-placeholder-count="0">
+<button onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:8px;background:none;border:0;padding:0;text-align:left;color:#1D1A17;animation:bgUp .4s cubic-bezier(.2,.7,.2,1) both;transition:transform .3s" style-hover="transform:translateY(-4px)"><div style="position:relative;width:100%;aspect-ratio:4/5;background:#E6DAC4;overflow:hidden"><img src="{{ p.img }}" alt="{{ p.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></img></div><span style="display:flex;justify-content:space-between;gap:8px;width:100%;font-size:16px"><span>{{ p.name }}</span><span>{{ p.priceStr }}</span></span></button>
+</sc-for>
+</div>
+</div>
+</div>
+<button onClick="{{ closeSearch }}" aria-label="Isara" style="flex:1;border:0;padding:0;background:rgba(29,26,23,.45);animation:bgFade .25s both;cursor:default"></button>
+</div>
+</sc-if>
+
+<sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;left:50%;bottom:28px;z-index:70;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 32px)"><div style="background:#1D1A17;color:#F3EBDD;padding:14px 18px;border-radius:2px;display:flex;gap:18px;align-items:center;font-size:15px;box-shadow:0 10px 24px rgba(29,26,23,.3);animation:bgUp .35s cubic-bezier(.2,.7,.2,1) both"><span>{{ toast }}</span><button onClick="{{ openCart }}" style="background:none;border:0;color:#F3EBDD;font-size:12px;letter-spacing:.2em;text-decoration:underline">TINGNAN</button></div></div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PRODUCTS = [
+  { id: 0, name: 'Paru-paro', no: 'NO. 027', img: 'assets/paru-paro.jpg', price: 2100, cat: 'Abo', order: 2, mat: 'Hinabi · Hand-painted', desc: 'Abong habi na may malaking lilang bulaklak at paru-parong ipininta ng kamay. Matibay na tinirintas na hawakan, may zipper sa itaas.' },
+  { id: 1, name: 'Sakura sa Gabi', no: 'NO. 013', img: 'assets/sakura-sa-gabi.jpg', price: 1850, cat: 'Itim', order: 1, mat: 'Hinabi · Hand-painted', desc: 'Itim na habi na may kumpol ng rosas, puti at lilang bulaklak na ipininta ng kamay sa isang gilid. Bagay sa araw at gabi.' },
+  { id: 2, name: 'Rosas Mayumi', no: 'NO. 028', img: 'assets/rosas-mayumi.jpg', price: 1950, cat: 'Rosas', order: 3, mat: 'Hinabi · Scarf na hawakan', desc: 'Pink na habi na may malaking rosas na ipininta sa buong harap. Ang hawakan ay binalot sa makulay na scarf na may buhol.' },
+  { id: 3, name: 'Rosas Ube', no: 'NO. 029', img: 'assets/rosas-ube.jpg', price: 1950, cat: 'Rosas', order: 4, mat: 'Hinabi · Scarf na hawakan', desc: 'Lilang habi na may malaking rosas na ipininta sa buong harap. Ang hawakan ay binalot sa scarf na may buhol.' },
+  { id: 4, name: 'Liwayway', no: 'NO. 030', img: 'assets/liwayway.jpg', price: 2100, cat: 'Abo', order: 5, mat: 'Hinabi · Hand-painted', desc: 'Abong habi na may puting bulaklak at makukulay na hagod ng pintura sa likod nito. Isa-isang ipininta, walang dalawang magkapareho.' },
+  { id: 5, name: 'Alon', no: 'NO. 031', img: 'assets/alon.jpg', price: 2100, cat: 'Berde', order: 10, mat: 'Hinabi · Hand-painted', desc: 'Berdeng-asul na habi na may puti at pink na magnolia, luntiang dahon, at umaalong laso ng asul. Sariwa at masigla, parang dagat.' },
+  { id: 6, name: 'Tagsibol', no: 'NO. 012', img: 'assets/tagsibol.jpg', price: 1850, cat: 'Rosas', order: 6, mat: 'Hinabi · Hand-painted', desc: 'Pink na habi na may sanga ng abo at lilang bulaklak na ipininta ng kamay. Malambot at masayang kulay para sa araw-araw.' },
+  { id: 7, name: 'Diwata', no: 'NO. 069', img: 'assets/diwata.jpg', price: 2450, cat: 'Kayumanggi', order: 9, mat: 'Hinabi · Portrait na pinta', desc: 'Kayumangging habi na may detalyadong portrait ng isang diwata na napapalibutan ng puting bulaklak at gintong hagod. Tunay na obra.' },
+  { id: 8, name: 'Rosas Kape', no: 'NO. 008', img: 'assets/rosas-kape.jpg', price: 1950, cat: 'Kayumanggi', order: 7, mat: 'Hinabi · Hand-painted', desc: 'Kulay-kape na habi na may malaking rosas na ipininta sa buong harap. Payak pero elegante, bagay sa kahit anong suot.' },
+  { id: 9, name: 'Dalaga', no: 'NO. 071', img: 'assets/dalaga.jpg', price: 2450, cat: 'Itim', order: 8, mat: 'Hinabi · Portrait na pinta', desc: 'Itim na habi na may portrait ng dalagang nakasombrero, kahel na rosas, at mga paru-parong monarch. Matapang at makulay.' },
+  { id: 10, name: 'Boss Lady', no: 'NO. 019', img: 'assets/boss-lady.jpg', price: 2450, cat: 'Puti', order: 15, mat: 'Hinabi · Portrait na pinta', desc: 'Puting habi na may portrait ng isang eleganteng babae na umiinom ng kape, pink na rosas, at sulat-kamay na “Boss Lady.” Para sa mga reyna ng sariling negosyo.' },
+  { id: 11, name: 'Hardin', no: 'NO. 011', img: 'assets/hardin.jpg', price: 1950, cat: 'Rosas', order: 11, mat: 'Hinabi · Hand-painted', desc: 'Pink na habi na may hardin ng kahel na peony, asul na bulaklak, at luntiang dahon na ipininta ng kamay sa ibabang bahagi.' },
+  { id: 12, name: 'Liryo', no: 'NO. 070', img: 'assets/liryo.jpg', price: 2450, cat: 'Itim', order: 12, mat: 'Hinabi · Portrait na pinta', desc: 'Itim na habi na may portrait ng babaeng nakasombrero at malaking dilaw na liryo. Kontrast ng dilim at liwanag.' },
+  { id: 13, name: 'Payak Lila', no: 'NO. 023', img: 'assets/payak-lila.jpg', price: 1250, cat: 'Lila', order: 13, mat: 'Hinabi · Walang pinta', desc: 'Lilang habi na walang pinta — malinis, payak, at handa para sa sarili mong custom na disenyo. Matibay na tinirintas na hawakan.' },
+  { id: 14, name: 'Sinag', no: 'NO. 020', img: 'assets/sinag.jpg', price: 2650, cat: 'Puti', order: 14, mat: 'Hinabi · Kahoy na hawakan', desc: 'Puting habi na may bilog na kahoy na hawakan at portrait ng babaeng nakasombrero, dilaw na liryo, at paru-paro. Isa sa pinakadetalyado naming obra.' },
+];
+const TAGS = { 'Paru-paro': 'PABORITO', 'Sakura sa Gabi': 'ISA NA LANG', 'Rosas Ube': 'BAGO', 'Liwayway': 'BAGO', 'Alon': 'BAGO', 'Diwata': 'ISA NA LANG', 'Dalaga': 'PABORITO', 'Boss Lady': 'BAGO', 'Sinag': 'BAGO' };
+const TAG_STYLE = { 'BAGO': ['#6B1A24', '#F3EBDD'], 'PABORITO': ['#1D1A17', '#F3EBDD'], 'ISA NA LANG': ['#B8925A', '#1D1A17'] };
+PRODUCTS.forEach(p => { p.label = (p.mat + ' · ' + p.no).toUpperCase(); p.tag = TAGS[p.name] || ''; const st = TAG_STYLE[p.tag] || ['', '']; p.tagBg = st[0]; p.tagFg = st[1]; p.isNew = p.tag === 'BAGO'; });
+const VIEWS = [{ label: 'Buong bag', pos: 'center 50%', scale: 1 }, { label: 'Detalye ng pinta', pos: '62% 62%', scale: 1.9 }, { label: 'Hawakan', pos: '50% 12%', scale: 1.7 }, { label: 'Habi', pos: '18% 70%', scale: 2.4 }];
+const LAKI = [{ label: 'Maliit', dim: '28 × 22 cm', add: -250 }, { label: 'Katamtaman', dim: '36 × 30 cm', add: 0 }, { label: 'Malaki', dim: '44 × 36 cm', add: 300 }];
+const DETAILS = [
+  { title: 'Materyal at habi', body: 'Hinabi ng kamay ng mga lokal na manghahabi sa Tarlac. Ang pinta ay ginawa ng kamay ng aming mga lokal na pintor.' },
+  { title: 'Pag-aalaga', body: 'Punasan ng basang tela; huwag ibabad. Patuyuin sa lilim. Normal ang bahagyang pagkakaiba ng kulay — gawa ito ng kamay.' },
+  { title: 'Shipping at returns', body: 'Metro Manila 2–3 araw, probinsya 4–7 araw. Libreng shipping sa ₱2,000 pataas. Returns sa loob ng 7 araw (hindi kasama ang custom).' },
+];
+const HELP = [
+  { title: 'Shipping', body: 'Nagpapadala kami sa buong Pilipinas. Metro Manila 2–3 araw, probinsya 4–7 araw. Libre ang shipping sa order na ₱2,000 pataas; ₱120 kung mas mababa.' },
+  { title: 'Paraan ng bayad', body: 'Tumatanggap kami ng GCash, Maya, at Cash on Delivery. Para sa custom na order, may 50% na downpayment bago simulan ang pinta.' },
+  { title: 'Returns at palit', body: 'Puwedeng ibalik sa loob ng 7 araw kung hindi pa nagamit at kumpleto ang tag. Hindi kasama ang mga custom na order.' },
+  { title: 'Pag-aalaga ng bayong', body: 'Punasan ng basang tela; huwag ibabad o i-washing machine. Patuyuin sa lilim para hindi kumupas ang pinta. Itago nang may laman para mapanatili ang hugis.' },
+  { title: 'Custom na order', body: 'Ipadala ang iyong ideya sa Custom na pinta page o mag-message sa amin. Pag-uusapan natin ang disenyo, kulay ng habi, at presyo bago magsimula.' },
+];
+const FILTERS = ['Lahat', 'Rosas', 'Abo', 'Itim', 'Kayumanggi', 'Berde', 'Puti', 'Lila', 'Bago'];
+const SORTS = ['Itinatampok', 'Pinakabago', 'Presyo ↑', 'Presyo ↓'];
+const PAY = ['GCash', 'Maya', 'Cash on delivery'];
+const SHIP_FIELDS = [['name', 'Pangalan', 'Juan dela Cruz'], ['phone', 'Mobile number', '09XX XXX XXXX'], ['address', 'Address', 'Kalye, barangay, lungsod, probinsya'], ['notes', 'Note para sa amin (optional)', 'Hal. para sa regalo']];
+const BASES = [{ label: 'Itim', sw: '#1D1A17' }, { label: 'Abo', sw: '#B9B4AE' }, { label: 'Pink', sw: '#E8707A' }, { label: 'Lila', sw: '#6A4FC2' }, { label: 'Kayumanggi', sw: '#8A6A55' }];
+const peso = n => '₱' + n.toLocaleString('en-PH');
+const KEY = 'bg-site-v1';
+const E = 'cubic-bezier(.2,.7,.2,1)';
+
+class Component extends DCLogic {
+  searchRef = React.createRef();
+  state = {
+    page: 'home', pid: 0, thumb: 0, laki: 1, qty: 1, open: 0, filter: 0, sort: 0,
+    cart: [], gift: false, cartOpen: false, searchOpen: false, query: '', toast: '',
+    form: { name: '', phone: '', address: '', notes: '' }, pay: 0, formError: false,
+    orders: [], user: null, login: { email: '', password: '' }, loginError: false,
+    custom: { name: '', contact: '', idea: '', base: 0 }, customSent: false, customError: false,
+    helpOpen: 0, lastOrder: null,
+  };
+
+  componentDidMount() {
+    try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) this.setState(s); } catch (e) {}
+  }
+  componentDidUpdate(_, prev) {
+    try { const { page, pid, cart, orders, user, gift, lastOrder, filter } = this.state; localStorage.setItem(KEY, JSON.stringify({ page, pid, cart, orders, user, gift, lastOrder, filter })); } catch (e) {}
+    if (this.state.searchOpen && !prev.searchOpen) setTimeout(() => this.searchRef.current && this.searchRef.current.focus(), 50);
+  }
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._a); }
+
+  go = (page, extra = {}) => {
+    this.setState({ page, cartOpen: false, searchOpen: false, ...extra });
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+  };
+  openProduct = id => this.go('product', { pid: id, thumb: 0, laki: 1, qty: 1, open: 0 });
+
+  addToCart = () => {
+    const { pid, laki, qty } = this.state; const p = PRODUCTS[pid];
+    const variant = LAKI[laki].label; const price = p.price + LAKI[laki].add;
+    this.setState(s => {
+      const ex = s.cart.find(c => c.pid === pid && c.variant === variant);
+      const cart = ex ? s.cart.map(c => c === ex ? { ...c, qty: c.qty + qty } : c) : [...s.cart, { id: 'c' + Date.now(), pid, name: p.name, variant, price, qty }];
+      return { cart, toast: p.name + ' — naidagdag sa bayong mo ✓', added: true };
+    });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 2800);
+    clearTimeout(this._a); this._a = setTimeout(() => this.setState({ added: false }), 1600);
+  };
+  setCartQty(id, d) { this.setState(s => ({ cart: s.cart.map(c => c.id === id ? { ...c, qty: Math.max(1, Math.min(9, c.qty + d)) } : c) })); }
+
+  totals() {
+    const s = this.state;
+    const items = s.cart.reduce((a, c) => a + c.price * c.qty, 0);
+    const sub = items + (s.gift && items ? 150 : 0);
+    const ship = sub >= 2000 || sub === 0 ? 0 : 120;
+    return { items, sub, ship, total: sub + ship };
+  }
+  placeOrder = () => {
+    const f = this.state.form;
+    if (!f.name.trim() || !f.phone.trim() || !f.address.trim()) { this.setState({ formError: true }); return; }
+    const t = this.totals();
+    const no = 'BG-' + String(Math.floor(1000 + Math.random() * 9000));
+    const order = { no, total: t.total, pay: PAY[this.state.pay], name: f.name.trim(), summary: this.state.cart.map(c => c.name + (c.qty > 1 ? ' ×' + c.qty : '')).join(', '), status: 'INIHAHANDA' };
+    this.setState(s => ({ orders: [order, ...s.orders], lastOrder: order, cart: [], gift: false, formError: false }));
+    this.go('done');
+  };
+  doLogin = () => {
+    const l = this.state.login;
+    if (!l.email.trim() || !l.password) { this.setState({ loginError: true }); return; }
+    const raw = l.email.split('@')[0].replace(/[._-]+/g, ' ');
+    const name = raw.charAt(0).toUpperCase() + raw.slice(1);
+    this.setState({ user: { name, email: l.email.trim() }, loginError: false, login: { email: '', password: '' } });
+  };
+  sendCustom = () => {
+    const c = this.state.custom;
+    if (!c.name.trim() || !c.contact.trim() || !c.idea.trim()) { this.setState({ customError: true }); return; }
+    this.setState({ customSent: true, customError: false });
+  };
+
+  renderVals() {
+    const s = this.state;
+    const prod = PRODUCTS[s.pid] || PRODUCTS[0];
+    const unit = prod.price + LAKI[s.laki].add;
+    const view = VIEWS[s.thumb];
+    const card = (p, i) => ({ ...p, priceStr: peso(p.price), delay: (0.05 + i * 0.07).toFixed(2) + 's', open: () => this.openProduct(p.id) });
+    const fl = FILTERS[s.filter];
+    let shop = PRODUCTS.filter(p => fl === 'Lahat' || (fl === 'Bago' ? p.isNew : p.cat === fl));
+    if (s.sort === 1) shop = [...shop].sort((a, b) => b.order - a.order);
+    if (s.sort === 2) shop = [...shop].sort((a, b) => a.price - b.price);
+    if (s.sort === 3) shop = [...shop].sort((a, b) => b.price - a.price);
+    const q = s.query.trim().toLowerCase();
+    const results = q ? PRODUCTS.filter(p => (p.name + ' ' + p.cat + ' ' + p.mat + ' ' + p.desc + ' ' + p.tag).toLowerCase().includes(q)) : PRODUCTS;
+    const t = this.totals();
+    const cartCount = s.cart.reduce((a, c) => a + c.qty, 0);
+    const pg = s.page;
+    const hasItems = s.cart.length > 0;
+    const nav = [
+      ['Koleksyon', () => this.go('shop', { filter: 0 }), pg === 'shop' && s.filter !== 8 || pg === 'product'],
+      ['Bago', () => this.go('shop', { filter: 8 }), pg === 'shop' && s.filter === 8],
+      ['Custom na pinta', () => this.go('custom'), pg === 'custom'],
+      ['Kuwento', () => this.go('story'), pg === 'story'],
+    ];
+    const setForm = (obj, k) => e => { const v = e.target.value; this.setState(x => ({ [obj]: { ...x[obj], [k]: v }, formError: false, loginError: false, customError: false })); };
+    const firstName = (s.lastOrder && s.lastOrder.name.split(' ')[0]) || 'suki';
+    return {
+      isHome: pg === 'home', isShop: pg === 'shop', isProduct: pg === 'product', isStory: pg === 'story', isCustom: pg === 'custom', isHelp: pg === 'help', isAccount: pg === 'account', isCheckout: pg === 'checkout', isDone: pg === 'done',
+      navItems: nav.map(([label, onClick, on]) => ({ label, onClick, color: on ? '#6B1A24' : '#1D1A17', line: on ? '#6B1A24' : 'transparent' })),
+      goHome: () => this.go('home'), goShop: () => this.go('shop', { filter: 0 }), goCustom: () => this.go('custom'), goStory: () => this.go('story'), goAccount: () => this.go('account'), goCheckout: () => this.go('checkout'),
+      accountLabel: s.user ? s.user.name.split(' ')[0] : 'Account',
+      openCart: () => this.setState({ cartOpen: true, toast: '' }), closeCart: () => this.setState({ cartOpen: false }),
+      openSearch: () => this.setState({ searchOpen: true }), closeSearch: () => this.setState({ searchOpen: false }),
+      searchRef: this.searchRef, query: s.query, onQuery: e => this.setState({ query: e.target.value }),
+      searchResults: results.map(card), searchCount: q ? results.length + ' RESULTA PARA SA “' + s.query.trim().toUpperCase() + '”' : 'LAHAT NG BAYONG',
+      toast: s.toast,
+      pillars: [['GAWA NG KAMAY', 'Personal na ginagawa kasama ang mga lokal na manghahabi at pintor.'], ['DISENYO', 'Makulay, uso, at kakaiba — hinabi at ipininta ng kamay.'], ['KALIDAD', 'Matibay na materyales at maingat sa bawat detalye.']].map(([title, body], i) => ({ title, body, delay: (0.7 + i * 0.15) + 's' })),
+      featured: [14, 10, 9, 0].map(i => PRODUCTS[i]).map(card),
+      filters: FILTERS.map((l, i) => ({ label: l, bg: i === s.filter ? '#6B1A24' : 'transparent', fg: i === s.filter ? '#F3EBDD' : '#6B1A24', onClick: () => this.setState({ filter: i }) })),
+      sorts: SORTS.map((l, i) => ({ label: l, color: i === s.sort ? '#6B1A24' : '#1D1A17', line: i === s.sort ? '#6B1A24' : 'transparent', onClick: () => this.setState({ sort: i }) })),
+      shopList: shop.map(card), shopEmpty: shop.length === 0, shopCount: shop.length + ' BAYONG', shopTitle: fl === 'Bago' ? 'Mga bago' : fl === 'Lahat' ? 'Koleksyon' : 'Koleksyon · ' + fl,
+      prod,
+      thumbs: VIEWS.map((v, i) => ({ ...v, border: i === s.thumb ? '2px solid #6B1A24' : '1px solid #D8C7A8', onClick: () => this.setState({ thumb: i }) })),
+      mainPos: view.pos, mainScale: view.scale, mainLabel: view.label.toUpperCase(),
+      unitPriceStr: peso(unit),
+      designOpts: PRODUCTS.map((p, i) => ({ label: p.name, img: p.img, ring: i === s.pid ? '2px solid #6B1A24' : '2px solid transparent', onClick: () => this.setState({ pid: i, thumb: 0 }) })),
+      lakiOpts: LAKI.map((o, i) => ({ ...o, bg: i === s.laki ? '#6B1A24' : 'transparent', fg: i === s.laki ? '#F3EBDD' : '#6B1A24', onClick: () => this.setState({ laki: i }) })),
+      qty: s.qty, incQty: () => this.setState(x => ({ qty: Math.min(9, x.qty + 1) })), decQty: () => this.setState(x => ({ qty: Math.max(1, x.qty - 1) })),
+      addToCart: this.addToCart, addLabel: s.added ? 'Nasa bayong mo na ✓' : 'Idagdag sa bayong · ' + peso(unit * s.qty),
+      details: DETAILS.map((d, i) => ({ ...d, open: s.open === i, sign: s.open === i ? '−' : '+', onClick: () => this.setState({ open: s.open === i ? -1 : i }) })),
+      related: PRODUCTS.filter(p => p.id !== prod.id && p.cat === prod.cat).concat(PRODUCTS.filter(p => p.id !== prod.id && p.cat !== prod.cat)).slice(0, 4).map(card),
+      milestones: [['2018', 'Itinayo ang Bayong Gracia', 'Matapos ang ilang negosyong hindi nagtagumpay, itinuloy ni Honey Tess ang sariling pangarap.'], ['MGA BAZAAR', 'Unang nakilala ng mga suki', 'Sa mga bazaar unang naipakita at nabili ang mga hinabi at ipinintang bayong.'], ['SOCIAL MEDIA', 'Lumawak online', 'Sa Facebook, Instagram, at TikTok — at sa mga e-commerce platform.'], ['DTI NEGOSYO CENTER', 'Suporta mula sa Paniqui', 'Marketing seminars, product clinics, at trade fairs na tumulong sa paglago ng negosyo.']].map(([k, title, body], i) => ({ k, title, body, delay: (0.1 + i * 0.12) + 's' })),
+      values: [['GAWA NG KAMAY', 'Personal na ginagawa ang bawat bag kasama ang mga lokal na manghahabi at pintor.'], ['NATATANGING DISENYO', 'Makukulay, uso, at malikhaing disenyo — walang dalawang magkapareho.'], ['KALIDAD', 'Maingat na pinipili ang materyales at binabantayan ang bawat detalye.'], ['LOKAL NA NEGOSYO', 'Nagsimula nang maliit sa Paniqui, Tarlac, at patuloy na lumalago kasama ang komunidad.']].map(([title, body]) => ({ title, body })),
+      steps: [['1', 'Sabihin ang ideya mo', 'Pangalan, bulaklak, kulay, o okasyon — mas detalyado, mas maganda.'], ['2', 'Piliin ang base', 'Pipili tayo ng kulay at laki ng habi, at pag-uusapan ang presyo.'], ['3', 'Ipinipinta at ipinapadala', 'Ipinipinta ng aming lokal na pintor, saka ipinapadala sa iyo.']].map(([n, title, body], i) => ({ n, title, body, delay: (0.2 + i * 0.12) + 's' })),
+      gallery: PRODUCTS.slice(0, 9).map(p => ({ name: p.name, img: p.img, open: () => this.openProduct(p.id) })),
+      customNotSent: !s.customSent, customSent: s.customSent, customError: s.customError,
+      customFields: [['name', 'Pangalan', 'Juan dela Cruz'], ['contact', 'Mobile number o FB/IG', '09XX XXX XXXX o @username']].map(([k, label, ph]) => ({ label, ph, value: s.custom[k], onChange: setForm('custom', k) })),
+      customIdea: s.custom.idea, onIdea: setForm('custom', 'idea'),
+      baseOpts: BASES.map((b, i) => ({ ...b, border: i === s.custom.base ? '#6B1A24' : '#D8C7A8', onClick: () => this.setState(x => ({ custom: { ...x.custom, base: i } })) })),
+      sendCustom: this.sendCustom, customFirst: s.custom.name.trim().split(' ')[0] || 'suki', customContact: s.custom.contact.trim() || 'iyo',
+      resetCustom: () => this.setState({ customSent: false, custom: { name: '', contact: '', idea: '', base: 0 } }),
+      helpItems: HELP.map((d, i) => ({ ...d, open: s.helpOpen === i, sign: s.helpOpen === i ? '−' : '+', onClick: () => this.setState({ helpOpen: s.helpOpen === i ? -1 : i }) })),
+      loggedIn: !!s.user, loggedOut: !s.user, userName: s.user ? s.user.name : '', userEmail: s.user ? s.user.email : '',
+      loginFields: [['email', 'Email', 'ikaw@email.com', 'email'], ['password', 'Password', '••••••••', 'password']].map(([k, label, ph, type]) => ({ label, ph, type, value: s.login[k], onChange: setForm('login', k) })),
+      loginError: s.loginError, doLogin: this.doLogin, doLogout: () => this.setState({ user: null }),
+      orderList: s.orders.map(o => ({ ...o, no: 'ORDER ' + o.no, totalStr: peso(o.total) })), noOrders: s.orders.length === 0,
+      cartCount, cartHasItems: hasItems, cartEmpty: !hasItems, cartOpen: s.cartOpen, searchOpen: s.searchOpen,
+      cartItems: s.cart.map(c => ({ ...c, img: (PRODUCTS[c.pid] || PRODUCTS[0]).img, lineStr: peso(c.price * c.qty), open: () => this.openProduct(c.pid), inc: () => this.setCartQty(c.id, 1), dec: () => this.setCartQty(c.id, -1), remove: () => this.setState(x => ({ cart: x.cart.filter(y => y.id !== c.id) })) })),
+      shipMsg: t.ship === 0 ? 'Libre ang shipping mo. Salamat!' : 'Kulang na lang ng ' + peso(2000 - t.sub) + ' para sa libreng shipping.',
+      shipStr: t.ship === 0 ? 'Libre' : peso(t.ship), totalStr: peso(t.total), gift: s.gift && hasItems,
+      toggleGift: () => this.setState(x => ({ gift: !x.gift })),
+      giftBorder: s.gift ? '#6B1A24' : '#D8C7A8', giftFill: s.gift ? '#6B1A24' : 'transparent', giftCheck: s.gift ? '✓' : '',
+      shipFields: SHIP_FIELDS.map(([k, label, ph]) => ({ label, ph, value: s.form[k], onChange: setForm('form', k) })),
+      payOpts: PAY.map((l, i) => ({ label: l, border: i === s.pay ? '#6B1A24' : '#D8C7A8', fill: i === s.pay ? '#6B1A24' : 'transparent', onClick: () => this.setState({ pay: i }) })),
+      formError: s.formError, placeOrder: this.placeOrder,
+      lastOrderNo: s.lastOrder ? 'ORDER NO. ' + s.lastOrder.no : '', lastTotal: s.lastOrder ? peso(s.lastOrder.total) : '', lastPay: s.lastOrder ? 'Bayad: ' + s.lastOrder.pay : '', firstName,
+      footShop: [['Lahat ng bayong', () => this.go('shop', { filter: 0 })], ['Mga bago', () => this.go('shop', { filter: 8 })], ['Custom na pinta', () => this.go('custom')], ['Ang aming kuwento', () => this.go('story')]].map(([label, onClick]) => ({ label, onClick })),
+      footHelp: [['Shipping', 0], ['Paraan ng bayad', 1], ['Returns at palit', 2], ['Pag-aalaga ng bayong', 3]].map(([label, i]) => ({ label, onClick: () => this.go('help', { helpOpen: i }) })),
+    };
+  }
+}
+</script>
+</body>
+</html>
